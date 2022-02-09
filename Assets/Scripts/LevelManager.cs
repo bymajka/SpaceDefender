@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private float sceneLoadDelay;
+    [SerializeField] private GameObject settingsCanvas;
+    [SerializeField] private GameObject menuCanvas;
     private ScoreKeeper scoreKeeper;
     
     private void Awake()
@@ -22,6 +24,17 @@ public class LevelManager : MonoBehaviour
             scoreKeeper.ResetScore();
         }
         SceneManager.LoadScene(1);
+    }
+
+    public void ShowSettings()
+    {
+        settingsCanvas.SetActive((true));
+        menuCanvas.SetActive(false);
+    }
+    public void ReturnToMenu()
+    {
+        settingsCanvas.SetActive((false));
+        menuCanvas.SetActive(true);
     }
     public void LoadMenu()
     {

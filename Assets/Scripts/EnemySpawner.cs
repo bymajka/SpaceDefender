@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -25,14 +26,14 @@ public class EnemySpawner : MonoBehaviour
             foreach (var wave in waveConfigList)
             {
                 currentWave = wave;
+                //currentWave = waveConfigList[Random.Range(0, waveConfigList.Count)]; - for random wave generation
                 for (int i = 0; i < currentWave.GetEnemyCount(); i++)
-                {
+                { 
                     Instantiate(currentWave.GetEnemyPrefab(i), 
                         currentWave.GetStartingWayPoint().position, 
                         Quaternion.identity, transform);
                     yield return new WaitForSeconds(currentWave.GetRandomSpawnTime());
                 }
-
                 yield return new WaitForSeconds(timeBetweenWaves);
             }
         } while (isLooping);
